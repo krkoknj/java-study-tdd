@@ -36,12 +36,15 @@ public class CourseSession {
     }
 
     Date getEndDate() {
+        final int sessionLength = 16;
+        final int daysInWeek = 7;
+        final int daysFromFridayToMonday = 3;
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(startDate);
-        int numberOfDays = 16 * 7 - 3;
+        // week * days per week - 3 days 이런 주석 대신 위의 상수 같이 정의 하는 편이 이해하기 쉽다.
+        int numberOfDays = sessionLength * daysInWeek - daysFromFridayToMonday; // week * days per week - 3 days
         calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-        Date endDate = calendar.getTime();
-        return endDate;
+        return calendar.getTime();
     }
 
     Date getStartDate() {
